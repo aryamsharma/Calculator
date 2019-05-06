@@ -10,6 +10,7 @@ def add_buttons(buttons):
     pass
 
 def game_loop():
+    pass
 
 if __name__ == '__main__':
     pass
