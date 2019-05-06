@@ -1,2 +1,6 @@
 import pygame
-import Collections
+import collections
+
+Button = collections.namedtuple('Button', ['label', 'x', 'y', 'length', 'height', 'color'])
+
+
