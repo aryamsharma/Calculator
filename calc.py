@@ -14,7 +14,7 @@ def make_buttons():
     buttons = {}
     
     length, width = 59, 49
-    x1, x2, x3, x4 = 2, 61, 120, 179
+    x1, x2, x3, x4 = 0, 59, 118, 177
 
     buttons['AC'] = Button('AC', BGREEN, x1, 139, length, width)
     buttons['MYS'] = Button('MYS', BGREEN, x2, 139, length, width)
@@ -46,6 +46,8 @@ def add_buttons(buttons):
     for button in buttons.values():
         pygame.draw.rect(screen, button.color, pygame.Rect(button.x, button.y, button.length, button.height))
         pygame.draw.rect(screen, BLACK, pygame.Rect(button.x, button.y, button.length, button.height), 1)
+        font = pygame.font.Font(None, 10)
+        functions = font.render(button.label, 1, BLACK)
 
 if __name__ == "__main__":
     screen = pygame.display.set_mode((234, 384))
