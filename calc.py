@@ -93,4 +93,3 @@ if __name__ == "__main__":
                 button = get_pressed_button(mx, my, buttons)
                 expression = build_expression(expression, button)
                 display_expression(expression)
-                
