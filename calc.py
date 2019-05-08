@@ -15,29 +15,29 @@ def make_buttons():
 
     buttons = []
 
-    buttons.append(Button('AC', BGREEN, x1, 139, length, width))
-    buttons.append(Button('MYS', BGREEN, x2, 139, length, width))
-    buttons.append(Button('MOD', BGREEN, x3, 139, length, width))
-    buttons.append(Button('/', BGREEN, x4, 139, length, width))
+    buttons.append(Button("AC", BGREEN, x1, 139, length, width))
+    buttons.append(Button("MYS", BGREEN, x2, 139, length, width))
+    buttons.append(Button("MOD", BGREEN, x3, 139, length, width))
+    buttons.append(Button("/", BGREEN, x4, 139, length, width))
 
-    buttons.append(Button('7', GREY, x1, 188, length, width))
-    buttons.append(Button('8', GREY, x2, 188, length, width))
-    buttons.append(Button('9', GREY, x3, 188, length, width))
-    buttons.append(Button('*', BGREEN, x4, 188, length, width))
+    buttons.append(Button("7", GREY, x1, 188, length, width))
+    buttons.append(Button("8", GREY, x2, 188, length, width))
+    buttons.append(Button("9", GREY, x3, 188, length, width))
+    buttons.append(Button("*", BGREEN, x4, 188, length, width))
 
-    buttons.append(Button('4', GREY, x1, 237, length, width))
-    buttons.append(Button('5', GREY, x2, 237, length, width))
-    buttons.append(Button('6', GREY, x3, 237, length, width))
-    buttons.append(Button('-', BGREEN, x4, 237, length, width))
+    buttons.append(Button("4", GREY, x1, 237, length, width))
+    buttons.append(Button("5", GREY, x2, 237, length, width))
+    buttons.append(Button("6", GREY, x3, 237, length, width))
+    buttons.append(Button("-", BGREEN, x4, 237, length, width))
 
-    buttons.append(Button('1', GREY, x1, 286, length, width))
-    buttons.append(Button('2', GREY, x2, 286, length, width))
-    buttons.append(Button('3', GREY, x3, 286, length, width))
-    buttons.append(Button('+', BGREEN, x4, 286, length, width))
+    buttons.append(Button("1", GREY, x1, 286, length, width))
+    buttons.append(Button("2", GREY, x2, 286, length, width))
+    buttons.append(Button("3", GREY, x3, 286, length, width))
+    buttons.append(Button("+", BGREEN, x4, 286, length, width))
 
-    buttons.append(Button('0', GREY, x1, 335, length * 2, width))
-    buttons.append(Button('.', GREY, x3, 335, length, width))
-    buttons.append(Button('=', BGREEN, x4, 335, length, width))
+    buttons.append(Button("0", GREY, x1, 335, length * 2, width))
+    buttons.append(Button(".", GREY, x3, 335, length, width))
+    buttons.append(Button("=", BGREEN, x4, 335, length, width))
 
     return buttons
 
@@ -56,22 +56,23 @@ def get_pressed_button(mx, my, buttons):
     return None
 
 def build_expression(expression, button):
-    result = '' if expression == '0' else expression
-    if button.label in ['AC', 'MYS']:
-        return '0'
-    elif button.label == 'MOD':
-        return '0' if len(result) == 0 else result + '%'
-    elif button.label == '=':
-        return '0' if len(result) == 0 else str(eval(result))
-    elif button.label in ['*', '/']:
-        return '0' if len(result) == 0 else result + button.label
+    result = "" if expression == "0" else expression
+    if button.label in ["AC", "MYS"]:
+        return "0"
+    elif button.label == "MOD":
+        return "0" if len(result) == 0 else result + "%"
+    elif button.label == "=":
+        return "0" if len(result) == 0 else str(eval(result))
+    elif button.label in ["*", "/"]:
+        return "0" if len(result) == 0 else result + button.label
     else:
         return result + button.label
 
-def bilt_answer(expression):
-    font = pygame.font.Font(None, 25)
+def display_expression(expression):
+    font = pygame.font.Font(None, 40)
     expression = font.render(expression, 9, WHITE)
     txt_length = expression.get_width()
+    pygame.draw.rect(screen, BLACK, pygame.Rect(0, 0, 234, 60))
     screen.blit(expression, (200 - txt_length , 20))
     pygame.display.update()
 
@@ -81,7 +82,7 @@ if __name__ == "__main__":
     buttons = make_buttons()
     screen.fill(BLACK)
     add_buttons(buttons)
-    expression = '0'
+    expression = "0"
     while True:
         pygame.display.update()
         for event in pygame.event.get():
@@ -91,5 +92,5 @@ if __name__ == "__main__":
                 mx, my = pygame.mouse.get_pos()
                 button = get_pressed_button(mx, my, buttons)
                 expression = build_expression(expression, button)
-                bilt_answer(expression)
+                display_expression(expression)
                 
