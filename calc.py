@@ -68,6 +68,13 @@ def build_expression(expression, button):
     else:
         return result + button.label
 
+def bilt_answer(expression):
+    font = pygame.font.Font(None, 25)
+    expression = font.render(expression, 9, WHITE)
+    txt_length = expression.get_width()
+    screen.blit(expression, (200 - txt_length , 20))
+    pygame.display.update()
+
 if __name__ == "__main__":
     pygame.init()
     screen = pygame.display.set_mode((234, 384))
@@ -84,4 +91,5 @@ if __name__ == "__main__":
                 mx, my = pygame.mouse.get_pos()
                 button = get_pressed_button(mx, my, buttons)
                 expression = build_expression(expression, button)
-                print(expression)
+                bilt_answer(expression)
+                
