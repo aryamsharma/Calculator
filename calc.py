@@ -9,7 +9,8 @@ BGREEN = (0, 106, 78)
 
 Button = collections.namedtuple("Button", ["label", "color", "x", "y", "length", "height"])
 
-def make_buttons():    
+def make_buttons():
+    """This stores all the buttons and it values in a nested list"""
     length, width = 59, 49
     x1, x2, x3, x4 = 0, 59, 118, 177
 
@@ -42,6 +43,7 @@ def make_buttons():
     return buttons
 
 def add_buttons(buttons):
+    """Bliting the buttons and their labels"""
     for button in buttons:
         pygame.draw.rect(screen, button.color, pygame.Rect(button.x, button.y, button.length, button.height))
         pygame.draw.rect(screen, BLACK, pygame.Rect(button.x, button.y, button.length, button.height), 1)
@@ -50,12 +52,14 @@ def add_buttons(buttons):
         screen.blit(functions, (button.x + 10, button.y + 5))
 
 def get_pressed_button(mx, my, buttons):
+    """Checking if the mouse is pressing a button"""
     for button in buttons:
         if button.x <= mx <= button.x + button.length and button.y <= my <= button.y + button.height:
             return button
     return None
 
 def build_expression(expression, button):
+    """Pure logic"""
     result = "" if expression == "0" else expression
     if button.label in ["AC", "MYS"]:
         return "0"
@@ -69,6 +73,7 @@ def build_expression(expression, button):
         return result + button.label
 
 def display_expression(expression):
+    """Displying the text"""
     font = pygame.font.Font(None, 40)
     expression = font.render(expression, 9, WHITE)
     txt_length = expression.get_width()
@@ -77,15 +82,19 @@ def display_expression(expression):
     pygame.display.update()
 
 if __name__ == "__main__":
+    """Run only if this is the main file that is being excuted"""
     pygame.init()
+    pygame.time.wait(100)
     screen = pygame.display.set_mode((234, 384))
     buttons = make_buttons()
     screen.fill(BLACK)
     add_buttons(buttons)
     expression = "0"
+    font = pygame.font.Font(None, 40)
     while True:
         pygame.display.update()
         for event in pygame.event.get():
+            """Quit check"""
             if event.type == pygame.QUIT:
                 pygame.quit()
             if event.type == pygame.MOUSEBUTTONDOWN:
