@@ -1,3 +1,8 @@
+# Title       : Calculator
+# Author      : Aryam Sharma
+# Date        : 08/05/2019
+# Description : It's an Calculator 
+
 import pygame
 import collections
 
